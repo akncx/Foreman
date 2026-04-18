@@ -51,7 +51,7 @@ Install from the local directory:
 
 ```bash
 droid plugin marketplace add .
-droid plugin install foreman@foreman
+droid plugin install foreman@Foreman
 ```
 
 Then invoke:
@@ -73,13 +73,13 @@ droid plugin marketplace add https://github.com/akncx/Foreman
 Install the plugin:
 
 ```bash
-droid plugin install foreman@foreman
+droid plugin install foreman@Foreman
 ```
 
 Update later with:
 
 ```bash
-droid plugin update foreman@foreman
+droid plugin update foreman@Foreman
 ```
 
 ## Design constraints
