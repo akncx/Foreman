@@ -2,17 +2,17 @@
 
 [Русская версия](./README-ru.md)
 
-Foreman is a plugin-first orchestration package for Factory Droid.
+Foreman is a plugin for Factory Droid.
 
-It turns the main chat into a repository orchestrator that can inspect a repo, split work into independent streams, propose a plan, and launch real worker subagents for execution.
+It helps the main chat act as a coordinator for repository work: break a task into parts, launch workers, and guide the next steps.
 
 Canonical repository:
 - `https://github.com/akncx/Foreman`
 
 ## What this plugin provides
 
-- `/foreman` slash entrypoint
-- a reusable `foreman` orchestration skill
+- `/foreman` command
+- a reusable `foreman` skill
 - a `foreman` droid for coordination
 - a `worker` droid for delegated execution
 
@@ -21,8 +21,8 @@ Canonical repository:
 - main chat = orchestrator
 - `worker` subagents = executors
 - one independent workstream usually maps to one branch and one worktree
-- repository inspection happens locally through Droid tools, not web fetch
-- runtime state, if needed, lives in the target repo under `.foreman/`
+- the plugin can split work into separate tasks when useful
+- it can keep task context in `.foreman/` inside the target repository
 
 ## Example
 
@@ -41,20 +41,19 @@ Expected behavior:
 
 ## Foreman vs Droid Missions
 
-Foreman is not meant to replace Missions. It is a lighter orchestration layer for medium-sized repository work.
+Foreman is not meant to replace Missions. It is a lighter option for medium-sized repository work.
 
 ### Where Foreman is better
 
 - less overkill for medium tasks
-- lower token overhead for chat-driven orchestration
+- lower token usage and less overhead
 - more direct control over workers, branches, and worktrees
-- easier to customize through skill and droid prompts
-- faster entrypoint for repo-local multi-step work
+- easier to customize
+- faster to start for everyday repository tasks
 
 ### Where Missions are better
 
 - stronger built-in structure for larger initiatives
-- more native managed workflow inside Droid
 - better fit for heavier multi-phase planning and execution
 
 ### Practical rule of thumb
@@ -66,7 +65,7 @@ Foreman is not meant to replace Missions. It is a lighter orchestration layer fo
 
 - `.factory-plugin/marketplace.json` — single-plugin marketplace manifest
 - `.factory-plugin/plugin.json` — plugin manifest
-- `skills/foreman/SKILL.md` — orchestration logic
+- `skills/foreman/SKILL.md` — main skill
 - `droids/foreman.md` — coordinator droid
 - `droids/worker.md` — execution droid
 
