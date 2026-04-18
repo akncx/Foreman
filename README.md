@@ -1,93 +1,67 @@
 # Foreman
 
-One agent in charge. Many tasks in motion.
+Foreman is a plugin-first orchestration package for Factory Droid.
 
-Foreman is a reusable orchestration toolkit for agent-driven software work. It helps one main controller agent create and manage task branches, worktrees, workers, validation, commits, pushes, pull requests, and bugfix loops.
+It turns the main chat into a repository orchestrator that can inspect a repo, split work into independent streams, propose a plan, and launch real worker subagents for execution.
 
 Canonical repository:
 - `https://github.com/akncx/Foreman`
 
-## Current support
+## What this plugin provides
 
-Foreman currently works only for **Factory Droid**.
+- `/foreman` slash entrypoint
+- a reusable `foreman` orchestration skill
+- a `foreman` droid for coordination
+- a `worker` droid for delegated execution
 
-This repository currently provides:
-- a Factory Droid-oriented skill/bootstrap layer
-- Droid definitions for `foreman` and `worker`
-- supporting scripts, templates, schemas, and policies
-- a project-level `AGENTS.md` template and provision script
+## Operating model
 
-Support for other agents is not added yet.
+- main chat = orchestrator
+- `worker` subagents = executors
+- one independent workstream usually maps to one branch and one worktree
+- repository inspection happens locally through Droid tools, not web fetch
+- runtime state, if needed, lives in the target repo under `.foreman/`
 
-## What it does
+## Example
 
-- accepts a high-level task from the user
-- decides whether to create a new task or resume an existing one
-- assigns one branch and one worktree per task
-- delegates implementation to worker agents
-- runs validation/builds in the correct worktree
-- keeps task state in a local registry
-- supports resume/fix cycles after testing feedback
+```text
+/foreman Refactor A, B, C
+```
 
-## Core idea
+Expected behavior:
 
-Foreman is not the worker. Foreman is the coordinator.
+1. inspect the current repository
+2. split the request into workstreams where safe
+3. propose a concise plan
+4. after confirmation, create branch/worktree strategy
+5. launch `worker` subagents through `Task`
+6. aggregate results and run validation
 
-- **Foreman** decides
-- **Workers** implement
-- **Scripts** execute deterministic project operations
+## Repository layout
 
-## Layout
+- `.factory-plugin/plugin.json` — plugin manifest
+- `skills/foreman/SKILL.md` — orchestration logic
+- `droids/foreman.md` — coordinator droid
+- `droids/worker.md` — execution droid
 
-- `.factory/droids/` — orchestrator and worker definitions
-- `scripts/` — helper automation scripts
-- `templates/` — task and bug report templates
-- `templates/AGENTS.template.md` — project-level AGENTS file template
-- `schemas/` — task registry schema
-- `state/` — local and example task state
-- `policies/` — orchestration rules
+## Local development
 
-## How to use
+Install from the local directory:
 
-Use Foreman as the main controller agent in chat.
+```bash
+droid plugin marketplace add .
+droid plugin install foreman@foreman
+```
 
-Recommended flow:
-1. open a Droid session in the target repository or orchestration repo
-2. invoke the `foreman` orchestrator droid
-3. describe the task in plain language
-4. let Foreman allocate branch/worktree, delegate to workers, validate, and prepare push/PR flow
+Then invoke:
 
-## Install for Factory Droid
+```text
+/foreman <your request>
+```
 
-At the moment, Foreman is intended to be used with Factory Droid.
+## Design constraints
 
-Recommended installation flow:
-
-1. clone the repository:
-   ```bash
-   git clone https://github.com/akncx/Foreman
-   ```
-2. open the repository in a Droid session
-3. use the included Factory Droid files from:
-   - `.factory/droids/foreman.md`
-   - `.factory/droids/worker.md`
-   - `SKILL.md`
-4. provision a project-level `AGENTS.md` into the target repository using:
-   ```powershell
-   .\scripts\provision-agents-file.ps1 -TargetPath "C:\path\to\target-project\AGENTS.md"
-   ```
-5. use Foreman in chat as the main controller agent for orchestration tasks
-
-For now, Foreman should be treated as a **Factory Droid-only skill/toolkit**.
-
-## Current MVP
-
-The current MVP includes:
-- a Factory Droid skill entry in `SKILL.md`
-- a generic orchestrator droid definition
-- a generic worker droid definition
-- a project-level `AGENTS.md` template and provision script
-- task registry helpers
-- task bootstrap and status update scripts
-- worktree/build/push/pr helper scripts
-- orchestration flow and policy files
+- no dependency on repository scripts
+- no bundled bootstrap state
+- no web fetch for local repository understanding
+- orchestration logic lives in the plugin assets themselves

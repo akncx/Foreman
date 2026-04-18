@@ -1,9 +1,0 @@
-{
-  "type": "object",
-  "properties": {
-    "tasks": {
-      "type": "array"
-    }
-  },
-  "required": ["tasks"]
-}
