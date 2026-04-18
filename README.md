@@ -5,6 +5,7 @@
 Foreman is a plugin for Factory Droid.
 
 It helps the main chat act as a coordinator for repository work: break a task into parts, launch workers, and guide the next steps.
+It is especially useful for multi-task work where you do not want to manually instruct Droid to create worker 1, worker 2, separate worktrees, and branch strategy step by step.
 
 Canonical repository:
 - `https://github.com/akncx/Foreman`
@@ -47,6 +48,7 @@ Foreman is not meant to replace Missions. It is a lighter option for medium-size
 
 - less overkill for medium tasks
 - lower token usage and less overhead
+- better fit for multitask work that needs several workers or worktrees
 - more direct control over workers, branches, and worktrees
 - easier to customize
 - faster to start for everyday repository tasks
@@ -60,6 +62,18 @@ Foreman is not meant to replace Missions. It is a lighter option for medium-size
 
 - use **Foreman** for medium-sized repository tasks where you want explicit worker orchestration with lower overhead
 - use **Missions** for bigger, longer, more structured efforts where extra framework is justified
+
+## Best use cases
+
+Foreman works especially well for:
+
+- multitask repository work where several independent parts can run in parallel
+- medium-sized refactors across a few subsystems
+- several unrelated bugfixes in one repository
+- backend + frontend + tests as coordinated but separate workstreams
+- monorepos where different packages, apps, or services can be delegated separately
+- follow-up work after review, where fixes can be split into multiple worker tasks
+- situations where you want explicit worker/worktree orchestration without writing all the coordination instructions by hand
 
 ## Repository layout
 
