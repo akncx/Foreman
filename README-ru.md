@@ -106,18 +106,3 @@ droid plugin install foreman@Foreman
 ```bash
 droid plugin update foreman@Foreman
 ```
-
-## Ограничения дизайна
-
-- нет зависимости от repository scripts
-- нет встроенного bootstrap state
-- нет web fetch для понимания локального репозитория
-- вся orchestration logic живёт внутри assets самого плагина
-
-## Checklist готовности к marketplace
-
-- plugin manifest с нужными metadata
-- installable root plugin layout
-- переиспользуемый skill в `skills/`
-- custom droids в `droids/`
-- нет machine-specific scripts или локальных bootstrap dependencies

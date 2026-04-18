@@ -106,18 +106,3 @@ Update later with:
 ```bash
 droid plugin update foreman@Foreman
 ```
-
-## Design constraints
-
-- no dependency on repository scripts
-- no bundled bootstrap state
-- no web fetch for local repository understanding
-- orchestration logic lives in the plugin assets themselves
-
-## Marketplace readiness checklist
-
-- plugin manifest with required metadata
-- installable root plugin layout
-- reusable skill in `skills/`
-- custom droids in `droids/`
-- no machine-specific scripts or local bootstrap dependencies
