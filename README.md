@@ -4,6 +4,9 @@ One agent in charge. Many tasks in motion.
 
 Foreman is a reusable orchestration toolkit for agent-driven software work. It helps one main controller agent create and manage task branches, worktrees, workers, validation, commits, pushes, pull requests, and bugfix loops.
 
+Canonical repository:
+- `https://github.com/akncx/Foreman`
+
 ## Current support
 
 Foreman currently works only for **Factory Droid**.

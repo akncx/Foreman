@@ -2,6 +2,11 @@
 
 Foreman currently ships as a Factory Droid-oriented skill/bootstrap kit.
 
+Canonical source:
+- `https://github.com/akncx/Foreman`
+
+Use this repository as the source of truth for the Foreman Factory Droid skill/toolkit and for future updates.
+
 ## Purpose
 
 Use this skill when you want to deploy a Foreman-style orchestration layer into a project so one controller agent can:
